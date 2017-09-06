@@ -201,6 +201,7 @@ public class Avion implements Serializable {
         numero_vol += (char)(r.nextInt(26) + 'a');
         numero_vol += (char)(r.nextInt(26) + 'a');
         numero_vol += (char)(r.nextInt(26) + 'a');
+        System.out.println("L'avion " + numero_vol + " a démaré");
     }
 //// modifie la valeur de l'avion avec la valeur pass�e en param�tre
 //
@@ -299,7 +300,7 @@ public class Avion implements Serializable {
         posX = posX + (int) dep_x;
         posY = posY + (int) dep_y;
 
-        afficher_donnees();
+        //afficher_donnees();
     }
 //
     void se_deplacer() {

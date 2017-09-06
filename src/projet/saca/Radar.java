@@ -51,6 +51,7 @@ public class Radar {
     public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
         Radar r = new Radar();
         r.lancerRadar();
+        System.out.println("Le radar a démaré");
     }
 
     void actionSurListe() throws ClassNotFoundException {
@@ -101,6 +102,7 @@ public class Radar {
     }
 
     void lancerRadar() throws ClassNotFoundException {
+        
         while (true) {
 
             try {
@@ -114,8 +116,10 @@ public class Radar {
                 }
                 fermer_communication();
             } catch (InterruptedException ex) {
+                
             }
         }
+        
     }
 
     void afficherListAvion() {
@@ -143,10 +147,10 @@ public class Radar {
     }
     
     void envoie_listeAvion() throws IOException {
-        if (socket.isConnected()) {
+        //if (socket.isConnected()) {
             try {
-                
-                objectOutputStream = new ObjectOutputStream(socket.getOutputStream()); //socket.getOutputStream()
+                Socket socketControlleur = new Socket("localhost", Saca.portControlleur);
+                objectOutputStream = new ObjectOutputStream(socketControlleur.getOutputStream()); //socket.getOutputStream()
                 objectOutputStream.writeObject(new ObjetInter("Radar", "envoi_liste", listAvion.toString()));
                 try {
                     Thread.sleep(3000);
@@ -154,12 +158,13 @@ public class Radar {
                 }
                 objectOutputStream.flush();
                 objectOutputStream.close();
+                
             } catch (IOException ex) {
                 System.out.println("Exception " + ex.getMessage());
                 objectOutputStream.close();
             }
-        } else {
-            System.out.println("Socket non connecte !");
-        }
+//        } else {
+//            System.out.println("Socket non connecte !");
+//        }
     }
 }

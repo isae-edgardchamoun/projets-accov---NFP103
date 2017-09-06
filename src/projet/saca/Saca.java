@@ -25,10 +25,13 @@ public class Saca {
     
     public void demarerServeur() throws IOException, ClassNotFoundException{
         serveurPortAvion = new ServerSocket(portAvion);
+        serveurPortAvion.setReuseAddress(true);
         serveurPortRadar = new ServerSocket(portRadar);
+        serveurPortRadar.setReuseAddress(true);
         serveurPortControlleur = new ServerSocket(portControlleur);
+        serveurPortControlleur.setReuseAddress(true);
         //ServerSocket serveurPortControlleur = new ServerSocket(portControlleur);
-        System.out.println("Le serveur est lance");
+        System.out.println("Le serveur a démaré");
         while(true){
             try {
                 socketAvion = serveurPortAvion.accept();
@@ -40,7 +43,7 @@ public class Saca {
                 SacaThread sacaThreadRadar = new SacaThread(socketRadar);
                 sacaThreadRadar.start();
                 
-                //sacaThreadRadar.join();
+                
                 socketControlleur = serveurPortControlleur.accept();
                 SacaThread sacaThreadControlleur = new SacaThread(socketControlleur);
                 sacaThreadControlleur.start();
