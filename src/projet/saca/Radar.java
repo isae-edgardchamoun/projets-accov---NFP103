@@ -51,7 +51,6 @@ public class Radar {
     public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
         Radar r = new Radar();
         r.lancerRadar();
-        System.out.println("Le radar a démaré");
     }
 
     void actionSurListe() throws ClassNotFoundException {
@@ -71,8 +70,10 @@ public class Radar {
                             }
                         }
                         if (numAvionExiste == false) {
+                            System.out.println("L'avion numero " + nouvelleNumeroAvion + " est détectée par radar et envoyée au controlleur");
                             listAvion.add(objetInter.getMessage());
                         } else {
+                            
                             int indexAvion = chercherIndexAvion(nouvelleNumeroAvion);
                             if (indexAvion > 0) {
                                 listAvion.set(indexAvion, objetInter.getMessage());
@@ -102,7 +103,7 @@ public class Radar {
     }
 
     void lancerRadar() throws ClassNotFoundException {
-        
+        System.out.println("Le radar a démarré");
         while (true) {
 
             try {
@@ -111,7 +112,7 @@ public class Radar {
                 actionSurListe();
                 tempsPasse += PAUSE;
                 if (tempsPasse == tempsMiseAJour) {
-                    afficherListAvion();
+                    //afficherListAvion(); 
                     tempsPasse = 0;
                 }
                 fermer_communication();

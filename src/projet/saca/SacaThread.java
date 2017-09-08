@@ -24,9 +24,9 @@ public class SacaThread extends Thread{
                 switch (socket.getLocalPort()) {
                     case 2000:
                         //LES TACHES D'AVION
+                        
                         if(objetInter.getAction().toLowerCase().equals("envoi_donnees") && Saca.socketRadar.isConnected()){
-                            //ServerSocket socketServerRadar = new ServerSocket(portRadar);
-                            //Socket socketRadar = socketServerRadar.accept();
+                            System.out.println("Echangement d'informations entre SACA et Radar");
                             ObjectOutputStream objectOutputStreamRadar = new ObjectOutputStream(Saca.socketRadar.getOutputStream());
                             objectOutputStreamRadar.writeObject(objetInter);
                             objectOutputStreamRadar.flush();
@@ -34,6 +34,7 @@ public class SacaThread extends Thread{
                         }
                         
                         if(objetInter.getAction().toLowerCase().equals("envoi_donnees") && Saca.socketControlleur.isConnected()){
+                            System.out.println("Echangement d'informations entre SACA et Controlleur");
                             ObjectOutputStream objectOutputStreamControlleur = new ObjectOutputStream(Saca.socketControlleur.getOutputStream());
                             objectOutputStreamControlleur.writeObject(objetInter);
                             objectOutputStreamControlleur.flush();

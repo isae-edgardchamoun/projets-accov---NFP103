@@ -31,7 +31,7 @@ public class Saca {
         serveurPortControlleur = new ServerSocket(portControlleur);
         serveurPortControlleur.setReuseAddress(true);
         //ServerSocket serveurPortControlleur = new ServerSocket(portControlleur);
-        System.out.println("Le serveur a démaré");
+        System.out.println("Le serveur a démarré");
         while(true){
             try {
                 socketAvion = serveurPortAvion.accept();

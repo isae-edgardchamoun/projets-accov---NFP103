@@ -113,12 +113,6 @@ public class Avion implements Serializable {
     }
 
     public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
-//        Socket socket = new Socket("localhost", Saca.portAvion);
-//        ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-//        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-//        ObjetInter objetInter = new ObjetInter("Avion", "AFFICHAGE CLASSE");
-//        objectOutputStream.writeObject(objetInter);
-//        socket.close();
        Avion a = new Avion();
        a.initialiser_avion();
        a.se_deplacer();
@@ -201,7 +195,7 @@ public class Avion implements Serializable {
         numero_vol += (char)(r.nextInt(26) + 'a');
         numero_vol += (char)(r.nextInt(26) + 'a');
         numero_vol += (char)(r.nextInt(26) + 'a');
-        System.out.println("L'avion " + numero_vol + " a démaré");
+        System.out.println("L'avion numero " + numero_vol + " a démarré");
     }
 //// modifie la valeur de l'avion avec la valeur pass�e en param�tre
 //

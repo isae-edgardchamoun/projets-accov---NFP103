@@ -19,7 +19,7 @@ public class Controlleur implements Runnable {
     ObjectInputStream objectInputStream;
     private Avion avion;
     static volatile boolean keepRunning = true;
-    static Controlleur test ;
+    static Controlleur controlleur ;
     static Thread t;
     private ArrayList<String> listAvion = new ArrayList<String>();
     private final Object lock = new Object();
@@ -136,12 +136,11 @@ public class Controlleur implements Runnable {
                     {    
                         choisirAvion = true;
                         System.out.println("Choisir nom de l'avion de la liste"); 
-                        
                         Scanner scanner = new Scanner(System.in);
                         String nomAvionChoisi = "";
                         nomAvionChoisi = scanner.nextLine();
                         
-                        
+                    
                         //VOIR SI L'AVION EXISTE DEJA DANS LA LISTE DES AVIONS
                         boolean avionExisteListeAvion =  false;
                         for (String avion : listAvion) {
@@ -194,42 +193,41 @@ public class Controlleur implements Runnable {
             }
             fermer_communication();
         }
-        //afficherMenu();
-        //System.out.println("Done looping.");
+  
     }
     
     public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
-        test = new Controlleur();
-
-        afficherMenu();
-        
-        
-        //Controlleur c = new Controlleur();
-        //c.lancerControlleur();
+        controlleur = new Controlleur();
+        System.out.println("Le controlleur a démarré");
+        afficherMenu();     
     }
     
     static void afficherMenu(){
         selectionMenu = -1;
         keepRunning = true;
-        t = new Thread(test);
+        t = new Thread(controlleur);
         t.setName("Controlleur " + compteurControlleur);
         compteurControlleur++;
         t.start();
         
-        System.out.println("Choisir du menu : ");
-        System.out.println("--------------------------------");
-        System.out.println("0 - Quitter Menu");
-        System.out.println("1 - Afficher liste des avions");
-        System.out.println("2 - Attacher pilote à une avion");
-        Scanner s = new Scanner(System.in);
-        //while ((selectionMenu = s.nextInt()) != 0 && selectionMenu != 2);
+        Thread threadKeyboard = new Thread(){
+            public void run(){
+                System.out.println("Choisir du menu : ");
+                System.out.println("--------------------------------");
+                System.out.println("0 - Quitter Menu");
+                System.out.println("1 - Afficher liste des avions");
+                System.out.println("2 - Attacher pilote à une avion");
+                Scanner s = new Scanner(System.in);
+                //while ((selectionMenu = s.nextInt()) != 0 && selectionMenu != 2);
 
-        while (s.hasNextInt() && !choisirAvion){
-            selectionMenu = s.nextInt();
-        }
+                while (s.hasNextInt() && !choisirAvion){
+                    selectionMenu = s.nextInt();
+                }
+            }
+        };
+
+        threadKeyboard.start();
         
-        //test.keepRunning = false;
-        //t.interrupt();  // cancel current sleep.
     }
     
     public void afficherListAvion(){
